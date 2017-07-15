@@ -10,7 +10,17 @@ module ToyRobot
     attr_reader :facing
 
     def left
-      @facing = (@facing + (0.25 * TURN)) % TURN
+      turn(0.25)
+    end
+
+    def right
+      turn(-0.25)
+    end
+
+    private
+
+    def turn(t)
+      @facing = (@facing + (t * TURN)) % TURN
     end
   end
 end
