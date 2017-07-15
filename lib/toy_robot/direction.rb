@@ -8,5 +8,9 @@ module ToyRobot
     SOUTH = (0.75 * TURN).freeze
 
     attr_reader :facing
+
+    def left
+      @facing = (@facing + (0.25 * TURN)) % TURN
+    end
   end
 end
