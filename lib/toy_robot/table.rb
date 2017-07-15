@@ -7,5 +7,9 @@ module ToyRobot
       @width = width
       @depth = depth
     end
+
+    def contains?(point)
+      (0..@width).cover?(point.x) && (0..@depth).cover?(point.y)
+    end
   end
 end
