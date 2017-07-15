@@ -7,5 +7,13 @@ module ToyRobot
       @x = x
       @y = y
     end
+
+    def eql?(other)
+      @x == other.x && @y == other.y
+    end
+
+    def translate(vector)
+      Point.new(@x + vector.element(0), @y + vector.element(1))
+    end
   end
 end

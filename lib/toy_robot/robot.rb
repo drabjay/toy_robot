@@ -13,5 +13,12 @@ module ToyRobot
       @position = position
       @facing = facing
     end
+
+    def move
+      return if @position.nil?
+      position = @position.translate(vector)
+      return unless @table.contains?(position)
+      @position = position
+    end
   end
 end

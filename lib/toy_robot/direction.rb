@@ -1,3 +1,5 @@
+require 'matrix'
+
 module ToyRobot
   # Direction
   module Direction
@@ -15,6 +17,10 @@ module ToyRobot
 
     def right
       turn(-0.25)
+    end
+
+    def vector
+      Vector[Math.cos(@facing), Math.sin(@facing)]
     end
 
     private
