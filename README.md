@@ -88,7 +88,18 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Execute:
+
+    $ bin/toy_robot
+
+And enter commands of the form:
+
+    PLACE X,Y,F
+    MOVE
+    LEFT
+    RIGHT
+    REPORT
+    EXIT
 
 ## Development
 
