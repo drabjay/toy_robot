@@ -10,7 +10,7 @@ module ToyRobot
       private
 
       def position
-        Point.new(args[0].to_i, args[1].to_i)
+        Point.new(args[0], args[1])
       end
 
       def facing
