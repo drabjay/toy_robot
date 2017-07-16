@@ -4,6 +4,7 @@ module ToyRobot
   # Direction
   module Direction
     TURN = (2 * Math::PI).freeze
+    ROUND = 12
 
     def self.included(base)
       base.extend ClassMethods
@@ -30,7 +31,7 @@ module ToyRobot
     end
 
     def vector
-      Vector[Math.cos(@facing), Math.sin(@facing)]
+      Vector[Math.cos(@facing).round(ROUND), Math.sin(@facing).round(ROUND)]
     end
 
     def direction

@@ -44,5 +44,18 @@ RSpec.describe 'bin/toy_robot' do
     end
     it { expect(report).to eq '3,3,NORTH' }
   end
+
+  describe 'example d' do
+    report = ''
+    Open3.popen3('bin/toy_robot') do |i, o|
+      i.puts 'PLACE 1,1,SOUTH'
+      i.puts 'MOVE'
+      i.puts 'REPORT'
+      i.close
+      report = o.gets.chomp
+      o.close
+    end
+    it { expect(report).to eq '1,0,SOUTH' }
+  end
 end
 # rubocop:enable Metrics/BlockLength
