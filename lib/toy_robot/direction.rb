@@ -4,10 +4,20 @@ module ToyRobot
   # Direction
   module Direction
     TURN = (2 * Math::PI).freeze
-    EAST = (0.0 * TURN).freeze
-    NORTH = (0.25 * TURN).freeze
-    WEST = (0.5 * TURN).freeze
-    SOUTH = (0.75 * TURN).freeze
+
+    def self.included(base)
+      base.extend ClassMethods
+      base.directions.each_with_index do |d, i|
+        Direction.const_set(d, TURN * i / base.directions.length)
+      end
+    end
+
+    # Methods to add to including class
+    module ClassMethods
+      def directions
+        %i[EAST NORTH WEST SOUTH]
+      end
+    end
 
     attr_reader :facing
 
@@ -21,6 +31,11 @@ module ToyRobot
 
     def vector
       Vector[Math.cos(@facing), Math.sin(@facing)]
+    end
+
+    def direction
+      return if @facing.nil?
+      self.class.directions[@facing / TURN * self.class.directions.length]
     end
 
     private

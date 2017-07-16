@@ -20,5 +20,10 @@ module ToyRobot
       return unless @table.contains?(position)
       @position = position
     end
+
+    def report
+      return if @position.nil?
+      "#{@position},#{direction}"
+    end
   end
 end
