@@ -10,5 +10,9 @@ module ToyRobot
     def execute
       raise NotImplementedError
     end
+
+    def args
+      @args.split(',')
+    end
   end
 end

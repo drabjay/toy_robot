@@ -7,7 +7,7 @@ RSpec.describe ToyRobot::Client do
 
   def received_command(command)
     client.command_for(command)
-    expect(robot).to have_received(command.downcase)
+    expect(robot).to have_received(command.split(' ').first.downcase)
   end
 
   describe '#command_for' do
@@ -25,6 +25,10 @@ RSpec.describe ToyRobot::Client do
 
     context 'when MOVE command' do
       it { received_command('MOVE') }
+    end
+
+    context 'when PLACE command' do
+      it { received_command('PLACE 3,2,NORTH') }
     end
   end
 end
