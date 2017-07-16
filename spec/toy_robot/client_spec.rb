@@ -5,26 +5,26 @@ RSpec.describe ToyRobot::Client do
   let(:table) { ToyRobot::Table.new(5, 5) }
   let(:client) { described_class.new(robot, table) }
 
+  def received_command(command)
+    client.command_for(command)
+    expect(robot).to have_received(command.downcase)
+  end
+
   describe '#command_for' do
     context 'when REPORT command' do
-      it 'robot should receive report' do
-        client.command_for('REPORT')
-        expect(robot).to have_received(:report)
-      end
+      it { received_command('REPORT') }
     end
 
     context 'when RIGHT command' do
-      it 'robot should receive RIGHT' do
-        client.command_for('RIGHT')
-        expect(robot).to have_received(:right)
-      end
+      it { received_command('RIGHT') }
     end
 
     context 'when LEFT command' do
-      it 'robot should receive LEFT' do
-        client.command_for('LEFT')
-        expect(robot).to have_received(:left)
-      end
+      it { received_command('LEFT') }
+    end
+
+    context 'when MOVE command' do
+      it { received_command('MOVE') }
     end
   end
 end
