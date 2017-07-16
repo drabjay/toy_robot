@@ -26,6 +26,7 @@ module ToyRobot
     private
 
     def turn(t)
+      return if @facing.nil?
       @facing = (@facing + (t * TURN)) % TURN
     end
   end
