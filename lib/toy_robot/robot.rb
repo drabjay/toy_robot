@@ -1,4 +1,5 @@
 require 'toy_robot/direction'
+require 'toy_robot/point'
 
 module ToyRobot
   # Robot

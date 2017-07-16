@@ -1,3 +1,5 @@
+require 'toy_robot/point'
+
 module ToyRobot
   # Table on which a Robot can be placed
   class Table
