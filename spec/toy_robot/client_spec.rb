@@ -12,5 +12,12 @@ RSpec.describe ToyRobot::Client do
         expect(robot).to have_received(:report)
       end
     end
+
+    context 'when RIGHT command' do
+      it 'robot should receive RIGHT' do
+        client.command_for('RIGHT')
+        expect(robot).to have_received(:right)
+      end
+    end
   end
 end
