@@ -1,9 +1,9 @@
 module ToyRobot
   class Command
-    # Right Command
-    class Right < Command
+    # Left Command
+    class Left < Command
       def execute
-        @robot.right
+        @robot.left
       end
     end
   end
