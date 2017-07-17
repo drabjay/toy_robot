@@ -31,12 +31,17 @@ module ToyRobot
     end
 
     def vector
+      return Vector[0, 0] unless facing?
       Vector[Math.cos(@facing).round(ROUND), Math.sin(@facing).round(ROUND)]
     end
 
     def direction
-      return if @facing.nil?
+      return unless facing?
       self.class.directions[@facing / TURN * self.class.directions.length]
+    end
+
+    def facing?
+      !@facing.nil?
     end
 
     private
@@ -46,7 +51,7 @@ module ToyRobot
     end
 
     def turn(t)
-      return if @facing.nil?
+      return unless facing?
       @facing = (@facing + (t * TURN)) % TURN
     end
   end
