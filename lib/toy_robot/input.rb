@@ -1,12 +1,8 @@
 module ToyRobot
   # Command Input
-  class Input
-    def initialize(str)
-      @str = str
-    end
-
+  class Input < String
     def first_word
-      @str.split(' ').first
+      split(' ').first
     end
 
     def first_downcase
@@ -18,7 +14,7 @@ module ToyRobot
     end
 
     def but_first_word
-      @str.split(' ').drop(1).join(' ')
+      split(' ').drop(1).join(' ')
     end
 
     def exit?
