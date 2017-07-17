@@ -6,7 +6,7 @@ RSpec.describe ToyRobot::Client do
   let(:client) { described_class.new(robot, table) }
 
   def received_command(command)
-    client.command_for(command)
+    client.command_for(ToyRobot::Input.new(command))
     expect(robot).to have_received(command.split(' ').first.downcase)
   end
 

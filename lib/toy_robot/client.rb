@@ -1,5 +1,6 @@
 require 'toy_robot/robot'
 require 'toy_robot/table'
+require 'toy_robot/input'
 require 'toy_robot/command'
 
 module ToyRobot
@@ -15,17 +16,15 @@ module ToyRobot
     end
 
     def command_for(input)
-      name = input.split(' ').first
-      args = input.split(' ').drop(1).join(' ')
-      require "toy_robot/command/#{name.downcase}"
-      command = Kernel.const_get("ToyRobot::Command::#{name.capitalize}")
-      command.new(@robot, @table, args).execute
+      require "toy_robot/command/#{input.first_downcase}"
+      command = Kernel.const_get("ToyRobot::Command::#{input.first_capitalize}")
+      command.new(@robot, @table, input.but_first_word).execute
     end
 
     def start
       loop do
-        input = gets
-        break if input =~ /exit/i
+        input = ToyRobot::Input.new(gets)
+        break if input.exit?
         command_for(input)
       end
     end
