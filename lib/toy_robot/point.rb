@@ -13,7 +13,7 @@ module ToyRobot
     end
 
     def translate(vector)
-      Point.new(@x + vector.element(0), @y + vector.element(1))
+      self.class.new(@x + vector.element(0), @y + vector.element(1))
     end
 
     def to_s
