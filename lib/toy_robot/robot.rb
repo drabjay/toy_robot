@@ -16,15 +16,19 @@ module ToyRobot
     end
 
     def move
-      return if @position.nil?
+      return unless placed?
       position = @position.translate(vector)
       return unless @table.contains?(position)
       @position = position
     end
 
     def report
-      return if @position.nil?
+      return unless placed?
       "#{@position},#{direction}"
+    end
+
+    def placed?
+      !@position.nil? && facing?
     end
   end
 end
