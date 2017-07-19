@@ -19,14 +19,14 @@ RSpec.describe ToyRobot::Robot do
       let(:robot) { described_class.new }
       let(:position) { ToyRobot::Point.new(3, 5) }
       let(:facing) { ToyRobot::Direction::EAST }
-      it { expect(robot.position).to eql ToyRobot::Point.new(4, 5) }
+      it { expect(robot.position).to eq ToyRobot::Point.new(4, 5) }
     end
 
     context 'when moving outside table' do
       let(:robot) { described_class.new }
       let(:position) { ToyRobot::Point.new(0, 4) }
       let(:facing) { ToyRobot::Direction::WEST }
-      it { expect(robot.position).to eql ToyRobot::Point.new(0, 4) }
+      it { expect(robot.position).to eq ToyRobot::Point.new(0, 4) }
     end
   end
 end

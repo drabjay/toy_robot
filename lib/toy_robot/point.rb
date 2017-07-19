@@ -8,7 +8,7 @@ module ToyRobot
       @y = y.to_i
     end
 
-    def eql?(other)
+    def ==(other)
       @x == other.x && @y == other.y
     end
 
