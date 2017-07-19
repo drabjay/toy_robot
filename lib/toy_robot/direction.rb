@@ -9,7 +9,7 @@ module ToyRobot
     def self.included(base)
       base.extend ClassMethods
       base.directions.each_with_index do |d, i|
-        Direction.const_set(d, TURN * i / base.directions.length)
+        const_set(d, TURN * i / base.directions.length)
       end
     end
 
