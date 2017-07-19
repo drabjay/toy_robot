@@ -6,18 +6,8 @@ module ToyRobot
     TURN = (2 * Math::PI).freeze
     ROUND = 12
 
-    def self.included(base)
-      base.extend ClassMethods
-      base.directions.each_with_index do |d, i|
-        const_set(d, TURN * i / base.directions.length)
-      end
-    end
-
-    # Methods to add to including class
-    module ClassMethods
-      def directions
-        %i[EAST NORTH WEST SOUTH]
-      end
+    def self.directions
+      %i[EAST NORTH WEST SOUTH]
     end
 
     attr_reader :facing
@@ -42,7 +32,7 @@ module ToyRobot
 
     def direction
       return unless facing?
-      self.class.directions[@facing / TURN * self.class.directions.length]
+      Direction.directions[@facing / TURN * Direction.directions.length]
     end
 
     def facing?
@@ -52,11 +42,11 @@ module ToyRobot
     private
 
     def valid?(facing)
-      self.class.directions.map { |d| Direction.const_get(d) }.include?(facing)
+      Direction.directions.map { |d| Direction.const_get(d) }.include?(facing)
     end
 
     def delta
-      1.0 / self.class.directions.length
+      1.0 / Direction.directions.length
     end
 
     def turn(t)
@@ -64,4 +54,10 @@ module ToyRobot
       self.facing = (@facing + (t * TURN)) % TURN
     end
   end
+end
+
+ToyRobot::Direction.directions.each_with_index do |d, i|
+  ToyRobot::Direction.const_set(
+    d, ToyRobot::Direction::TURN * i / ToyRobot::Direction.directions.length
+  )
 end
