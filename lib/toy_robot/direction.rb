@@ -22,6 +22,11 @@ module ToyRobot
 
     attr_reader :facing
 
+    def facing=(value)
+      return unless valid?(value)
+      @facing = value
+    end
+
     def left
       turn(+delta)
     end
@@ -46,13 +51,17 @@ module ToyRobot
 
     private
 
+    def valid?(facing)
+      self.class.directions.map { |d| Direction.const_get(d) }.include?(facing)
+    end
+
     def delta
       1.0 / self.class.directions.length
     end
 
     def turn(t)
       return unless facing?
-      @facing = (@facing + (t * TURN)) % TURN
+      self.facing = (@facing + (t * TURN)) % TURN
     end
   end
 end

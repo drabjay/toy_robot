@@ -9,10 +9,10 @@ module ToyRobot
     attr_reader :table, :position
 
     def place(table, position, facing)
-      return unless table.contains?(position)
+      return unless table.contains?(position) && valid?(facing)
       @table = table
       @position = position
-      @facing = facing
+      self.facing = facing
     end
 
     def move
