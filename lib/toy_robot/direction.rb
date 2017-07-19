@@ -23,11 +23,11 @@ module ToyRobot
     attr_reader :facing
 
     def left
-      turn(direction_delta)
+      turn(+delta)
     end
 
     def right
-      turn(-direction_delta)
+      turn(-delta)
     end
 
     def vector
@@ -46,7 +46,7 @@ module ToyRobot
 
     private
 
-    def direction_delta
+    def delta
       1.0 / self.class.directions.length
     end
 
