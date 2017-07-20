@@ -21,11 +21,11 @@ module ToyRobot
     end
 
     def left
-      turn(+self.class.delta)
+      rotate(+self.class.delta)
     end
 
     def right
-      turn(-self.class.delta)
+      rotate(-self.class.delta)
     end
 
     def to_s
@@ -42,7 +42,7 @@ module ToyRobot
 
     private
 
-    def turn(t)
+    def rotate(t)
       self.class.new((@radians + (t * TURN)) % TURN)
     end
 
