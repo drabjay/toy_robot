@@ -25,12 +25,12 @@ module ToyRobot
 
     def left
       return unless facing?
-      @facing = @facing.left
+      @facing = @facing.rotate(+ToyRobot::Direction.delta)
     end
 
     def right
       return unless facing?
-      @facing = @facing.right
+      @facing = @facing.rotate(-ToyRobot::Direction.delta)
     end
 
     def facing?

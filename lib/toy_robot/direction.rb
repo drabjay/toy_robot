@@ -20,12 +20,8 @@ module ToyRobot
       @radians = radians
     end
 
-    def left
-      rotate(+self.class.delta)
-    end
-
-    def right
-      rotate(-self.class.delta)
+    def rotate(t)
+      self.class.new((@radians + (t * TURN)) % TURN)
     end
 
     def to_s
@@ -38,12 +34,6 @@ module ToyRobot
 
     def ==(other)
       @radians == other.radians
-    end
-
-    private
-
-    def rotate(t)
-      self.class.new((@radians + (t * TURN)) % TURN)
     end
 
     directions.each_with_index do |d, i|
