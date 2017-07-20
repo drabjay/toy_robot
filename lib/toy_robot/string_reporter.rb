@@ -6,7 +6,7 @@ module ToyRobot
     def report(robot)
       super(robot)
       return unless placed?
-      "#{position},#{direction}"
+      "#{position},#{facing}"
     end
   end
 end

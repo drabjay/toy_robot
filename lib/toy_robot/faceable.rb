@@ -1,45 +1,26 @@
 require 'toy_robot/direction'
 
 module ToyRobot
-  # Direction
+  # Faceable
   module Faceable
     attr_reader :facing
 
     def facing=(direction)
-      return unless faceable?(direction)
       @facing = direction
     end
 
     def left
-      turn(+ToyRobot::Direction.delta)
+      return unless facing?
+      @facing = @facing.left
     end
 
     def right
-      turn(-ToyRobot::Direction.delta)
-    end
-
-    def direction
-      ToyRobot::Direction.direction(@facing)
-    end
-
-    def vector
-      ToyRobot::Direction.vector(@facing)
+      return unless facing?
+      @facing = @facing.right
     end
 
     def facing?
       !@facing.nil?
-    end
-
-    def faceable?(facing)
-      ToyRobot::Direction.valid?(facing)
-    end
-
-    private
-
-    def turn(t)
-      return unless facing?
-      self.facing =
-        (@facing + (t * ToyRobot::Direction::TURN)) % ToyRobot::Direction::TURN
     end
   end
 end

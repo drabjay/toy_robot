@@ -11,7 +11,7 @@ module ToyRobot
     attr_reader :table, :position
 
     def place(table, position, facing)
-      return unless table.contains?(position) && faceable?(facing)
+      return unless table.contains?(position)
       @table = table
       @position = position
       self.facing = facing
@@ -19,7 +19,7 @@ module ToyRobot
 
     def move
       return unless placed?
-      position = @position.translate(vector)
+      position = @position.translate(@facing.vector)
       return unless @table.contains?(position)
       @position = position
     end

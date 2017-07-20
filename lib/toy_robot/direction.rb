@@ -2,7 +2,7 @@ require 'matrix'
 
 module ToyRobot
   # Direction
-  module Direction
+  class Direction
     TURN = (2 * Math::PI).freeze
     ROUND = 12
 
@@ -10,26 +10,44 @@ module ToyRobot
       %i[EAST NORTH WEST SOUTH]
     end
 
-    def self.direction(direction)
-      return if direction.nil?
-      directions[direction / TURN * directions.length]
-    end
-
-    def self.vector(direction)
-      return Vector[0, 0] if direction.nil?
-      Vector[Math.cos(direction).round(ROUND), Math.sin(direction).round(ROUND)]
-    end
-
-    def self.valid?(direction)
-      directions.map { |d| Direction.const_get(d) }.include?(direction)
-    end
-
     def self.delta
       1.0 / directions.length
     end
 
+    attr_reader :radians
+
+    def initialize(radians)
+      @radians = radians
+    end
+
+    def left
+      turn(+self.class.delta)
+    end
+
+    def right
+      turn(-self.class.delta)
+    end
+
+    def to_s
+      self.class.directions[@radians / TURN * self.class.directions.length].to_s
+    end
+
+    def vector
+      Vector[Math.cos(@radians).round(ROUND), Math.sin(@radians).round(ROUND)]
+    end
+
+    def ==(other)
+      @radians == other.radians
+    end
+
+    private
+
+    def turn(t)
+      self.class.new((@radians + (t * TURN)) % TURN)
+    end
+
     directions.each_with_index do |d, i|
-      const_set(d, TURN * i / directions.length)
+      const_set(d, new(TURN * i / directions.length))
     end
   end
 end
