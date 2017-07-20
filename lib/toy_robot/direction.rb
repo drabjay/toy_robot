@@ -53,11 +53,9 @@ module ToyRobot
       return unless facing?
       self.facing = (@facing + (t * TURN)) % TURN
     end
-  end
-end
 
-ToyRobot::Direction.directions.each_with_index do |d, i|
-  ToyRobot::Direction.const_set(
-    d, ToyRobot::Direction::TURN * i / ToyRobot::Direction.directions.length
-  )
+    directions.each_with_index do |d, i|
+      const_set(d, TURN * i / directions.length)
+    end
+  end
 end
