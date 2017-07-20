@@ -1,10 +1,12 @@
 require 'toy_robot/direction'
 require 'toy_robot/point'
+require 'toy_robot/reportable'
 
 module ToyRobot
   # Robot
   class Robot
     include Direction
+    include Reportable
 
     attr_reader :table, :position
 
@@ -20,11 +22,6 @@ module ToyRobot
       position = @position.translate(vector)
       return unless @table.contains?(position)
       @position = position
-    end
-
-    def report
-      return unless placed?
-      "#{@position},#{direction}"
     end
 
     def placed?
