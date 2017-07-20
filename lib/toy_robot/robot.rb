@@ -1,17 +1,17 @@
-require 'toy_robot/direction'
 require 'toy_robot/point'
+require 'toy_robot/faceable'
 require 'toy_robot/reportable'
 
 module ToyRobot
   # Robot
   class Robot
-    include Direction
+    include Faceable
     include Reportable
 
     attr_reader :table, :position
 
     def place(table, position, facing)
-      return unless table.contains?(position) && valid?(facing)
+      return unless table.contains?(position) && faceable?(facing)
       @table = table
       @position = position
       self.facing = facing

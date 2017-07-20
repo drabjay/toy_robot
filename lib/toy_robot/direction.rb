@@ -10,48 +10,22 @@ module ToyRobot
       %i[EAST NORTH WEST SOUTH]
     end
 
-    attr_reader :facing
-
-    def facing=(value)
-      return unless valid?(value)
-      @facing = value
+    def self.direction(direction)
+      return if direction.nil?
+      directions[direction / TURN * directions.length]
     end
 
-    def left
-      turn(+delta)
+    def self.vector(direction)
+      return Vector[0, 0] if direction.nil?
+      Vector[Math.cos(direction).round(ROUND), Math.sin(direction).round(ROUND)]
     end
 
-    def right
-      turn(-delta)
+    def self.valid?(direction)
+      directions.map { |d| Direction.const_get(d) }.include?(direction)
     end
 
-    def vector
-      return Vector[0, 0] unless facing?
-      Vector[Math.cos(@facing).round(ROUND), Math.sin(@facing).round(ROUND)]
-    end
-
-    def direction
-      return unless facing?
-      Direction.directions[@facing / TURN * Direction.directions.length]
-    end
-
-    def facing?
-      !@facing.nil?
-    end
-
-    private
-
-    def valid?(facing)
-      Direction.directions.map { |d| Direction.const_get(d) }.include?(facing)
-    end
-
-    def delta
-      1.0 / Direction.directions.length
-    end
-
-    def turn(t)
-      return unless facing?
-      self.facing = (@facing + (t * TURN)) % TURN
+    def self.delta
+      1.0 / directions.length
     end
 
     directions.each_with_index do |d, i|
