@@ -17,11 +17,11 @@ module ToyRobot
     attr_reader :radians
 
     def initialize(radians)
-      @radians = radians
+      @radians = radians % TURN
     end
 
     def rotate(t)
-      self.class.new((@radians + (t * TURN)) % TURN)
+      self.class.new(@radians + (t * TURN))
     end
 
     def to_s
